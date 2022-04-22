@@ -17,7 +17,6 @@ jobs:
         machines: [dragonboard-410c, qrb5165-rb5, sa8155p-adp]
         tclibc: [glibc, musl]
     steps:
-    - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
