@@ -5,6 +5,8 @@ on:
 
 env:
   POKY_URL: http://git.yoctoproject.org/git/poky
+  DISTRO: poky
+  HOST: ubuntu-20.04
 
 jobs:
   meta-qcom-premerge-build-test:
@@ -35,9 +37,9 @@ jobs:
               }
             ]
           },
-          "container": "ubuntu-20.04",
+          "container": "$HOST",
           "envsetup": "poky/oe-init-build-env",
-          "distro": "poky",
+          "distro": "$DISTRO",
           "machine": "dragonboard-410c",
           "target": "core-image-minimal",
           "bblayers_conf": [
