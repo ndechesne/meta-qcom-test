@@ -50,7 +50,7 @@ jobs:
           "machine": "$MACHINE",
           "target": "core-image-minimal",
           "bblayers_conf": [
-            "BBLAYERS += '../meta-qcom/'"
+            "BBLAYERS += '../meta-qcom-test/'"
           ],
           "artifacts": [
             "\$DEPLOY_DIR"
