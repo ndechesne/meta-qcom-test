@@ -12,6 +12,10 @@ jobs:
   meta-qcom-premerge-build-test:
     name: Premerge build test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        machines: [dragonboard410c, qrb5165-rb5, sa8155p-adp]
+        tclibc: [glibc, musl]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -22,6 +26,9 @@ jobs:
       run: |
         python -m pip install --upgrade tuxsuite
     - name: Setup tux definition
+      env:
+        MACHINE: ${{ matrix.machines }}
+        TCLIBC: ${{ matrix.tclibc }}
       run: |
         cat << EOF > tux.json
         {
@@ -40,7 +47,7 @@ jobs:
           "container": "$HOST",
           "envsetup": "poky/oe-init-build-env",
           "distro": "$DISTRO",
-          "machine": "dragonboard-410c",
+          "machine": "$MACHINE",
           "target": "core-image-minimal",
           "bblayers_conf": [
             "BBLAYERS += '../meta-qcom/'"
@@ -52,7 +59,7 @@ jobs:
           },
           "local_conf": [
             "INHERIT += 'buildstats buildstats-summary'",
-            "TCLIBC := 'glibc'"
+            "TCLIBC := '$TCLIBC'"
           ]
         }
         EOF
