@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        machines: [dragonboard410c, qrb5165-rb5, sa8155p-adp]
+        machines: [dragonboard-410c, qrb5165-rb5, sa8155p-adp]
         tclibc: [glibc, musl]
     steps:
     - uses: actions/checkout@v3
