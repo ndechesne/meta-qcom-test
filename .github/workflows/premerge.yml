@@ -32,7 +32,7 @@ jobs:
                 "branch": "$GITHUB_BASE_REF"
               },
               {
-                "url": "https://github.com/ndechesne/meta-qcom",
+                "url": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY",
                 "ref": "$GITHUB_REF"
               }
             ]
