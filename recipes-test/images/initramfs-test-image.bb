@@ -3,9 +3,6 @@ require recipes-test/images/initramfs-tiny-image.bb
 DESCRIPTION = "Small ramdisk image for running tests (bootrr, etc)"
 
 PACKAGE_INSTALL += " \
-    bluez5 \
-    dhcp-client \
-    diag \
     dropbear \
     e2fsprogs \
     e2fsprogs-e2fsck \
