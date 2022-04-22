@@ -1,0 +1,60 @@
+name: Build test
+
+on:
+  pull_request:
+
+env:
+  POKY_URL: http://git.yoctoproject.org/git/poky
+
+jobs:
+  meta-qcom-premerge-build-test:
+    name: Premerge build test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.x"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade tuxsuite
+    - name: Setup tux definition
+      run: |
+        cat << EOF > tux.json
+        {
+          "sources": {
+            "git_trees": [
+              {
+                "url": "$POKY_URL",
+                "branch": "$GITHUB_BASE_REF"
+              },
+              {
+                "url": "https://github.com/ndechesne/meta-qcom",
+                "ref": "$GITHUB_REF"
+              }
+            ]
+          },
+          "container": "ubuntu-20.04",
+          "envsetup": "poky/oe-init-build-env",
+          "distro": "poky",
+          "machine": "dragonboard-410c",
+          "target": "core-image-minimal",
+          "bblayers_conf": [
+            "BBLAYERS += '../meta-qcom/'"
+          ],
+          "artifacts": [
+            "\$DEPLOY_DIR"
+          ],
+            "environment": {
+          },
+          "local_conf": [
+            "INHERIT += 'buildstats buildstats-summary'",
+            "TCLIBC := 'glibc'"
+          ]
+        }
+        EOF
+    - name: Run build
+      run: |
+        tuxsuite bake submit tux.json
+
