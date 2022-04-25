@@ -11,7 +11,7 @@ env:
 
 jobs:
   meta-qcom-premerge-build-test:
-    name: ${{ matrix.machine }}/${{ matrix.tclibc }}/$DISTRO
+    name: ${{ matrix.machine }}/${{ matrix.tclibc }}/${{ env.DISTRO }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
