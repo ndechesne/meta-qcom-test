@@ -1,4 +1,4 @@
-name: Build test
+name: PR build test
 
 on:
   pull_request:
@@ -7,14 +7,16 @@ env:
   POKY_URL: http://git.yoctoproject.org/git/poky
   DISTRO: poky
   HOST: ubuntu-20.04
+  IMAGES: core-image-base core-image-weston core-image-x11 initramfs-test-image initramfs-test-full-image cryptodev-module
 
 jobs:
   meta-qcom-premerge-build-test:
-    name: Premerge build test
+    name: ${{ matrix.machine }}/${{ matrix.tclibc }}/$DISTRO
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        machines: [dragonboard-410c, qrb5165-rb5, sa8155p-adp]
+        machine: [dragonboard-410c, dragonboard-845c, qrb5165-rb5, sa8155p-adp, qcom-armv8a, sdx55-mtp, sa8155p-adp]
         tclibc: [glibc, musl]
     steps:
     - name: Set up Python
@@ -26,7 +28,7 @@ jobs:
         python -m pip install --upgrade tuxsuite
     - name: Setup tux definition
       env:
-        MACHINE: ${{ matrix.machines }}
+        MACHINE: ${{ matrix.machine }}
         TCLIBC: ${{ matrix.tclibc }}
       run: |
         cat << EOF > tux.json
@@ -47,7 +49,7 @@ jobs:
           "envsetup": "poky/oe-init-build-env",
           "distro": "$DISTRO",
           "machine": "$MACHINE",
-          "target": "core-image-minimal",
+          "target": "$IMAGES",
           "bblayers_conf": [
             "BBLAYERS += '../meta-qcom-test/'"
           ],
@@ -67,4 +69,3 @@ jobs:
         tuxsuite bake submit tux.json
       env:
         TUXSUITE_TOKEN: ${{ secrets.TUXSUITE_TOKEN }}
-
