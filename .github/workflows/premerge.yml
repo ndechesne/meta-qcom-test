@@ -38,7 +38,7 @@ jobs:
             "git_trees": [
               {
                 "url": "$POKY_URL",
-                "branch": "$GITHUB_REF"
+                "branch": "$GITHUB_BASE_REF"
               },
               {
                 "url": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY",
