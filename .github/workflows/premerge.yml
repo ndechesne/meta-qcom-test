@@ -52,7 +52,7 @@ jobs:
           "machine": "$MACHINE",
           "target": "$IMAGES",
           "bblayers_conf": [
-            "BBLAYERS += '../meta-qcom/'"
+            "BBLAYERS += '../meta-qcom-test/'"
           ],
           "artifacts": [
             "\$DEPLOY_DIR"
