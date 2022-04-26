@@ -1,7 +1,7 @@
 name: PR build test
 
 on:
-  pull_request:
+  pull_request_target:
 
 env:
   POKY_URL: http://git.yoctoproject.org/git/poky
@@ -16,8 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: [dragonboard-410c, dragonboard-845c, qrb5165-rb5, qcom-armv8a, sdx55-mtp, sa8155p-adp, qcom-armv7a]
-        tclibc: [glibc, musl]
+        machine: [dragonboard-410c]
+        tclibc: [glibc]
     steps:
     - name: Set up Python
       uses: actions/setup-python@v3
@@ -30,6 +30,7 @@ jobs:
       env:
         MACHINE: ${{ matrix.machine }}
         TCLIBC: ${{ matrix.tclibc }}
+        PR: ${{ github.event.pull_request.number }}
       run: |
         cat << EOF > tux.json
         {
@@ -37,11 +38,11 @@ jobs:
             "git_trees": [
               {
                 "url": "$POKY_URL",
-                "branch": "$GITHUB_BASE_REF"
+                "branch": "$GITHUB_REF"
               },
               {
                 "url": "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY",
-                "ref": "$GITHUB_REF"
+                "ref": "refs/pull/$PR/merge"
               }
             ]
           },
