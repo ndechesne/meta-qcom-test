@@ -40,12 +40,18 @@ PACKAGE_INSTALL += " \
 # We'd like to include extra packages provided by layers which we do not depend
 # on. This can be handled by .bbappends, but then image recipes including this
 # one would not get all these tools. So simulate dynamic bbappend here.
+
+# ncurses-terminfo is provided by oe-core layer, but it's only needed for gps (cgps), so include it here
 PACKAGE_INSTALL_openembedded-layer += " \
     cpufrequtils \
     cryptsetup \
     devmem2 \
+    gpsd \
+    gpsd-machine-conf \
+    gps-utils \
     lmsensors-config-libsensors \
     lmsensors-sensors \
+    ncurses-terminfo-base \
 "
 
 PACKAGE_INSTALL_networking-layer += " \
