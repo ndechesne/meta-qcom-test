@@ -39,9 +39,9 @@ jobs:
         MACHINE: ${{ matrix.machine }}
         TCLIBC: ${{ matrix.tclibc }}
         PR: ${{ github.event.pull_request.number }}
-        POKY_URL: ${{inputs.poky_url}}
         IMAGES: ${{inputs.images}}
         DISTRO: ${{inputs.distro}}
+        HOST: {{inputs.host}}
       run: |
         cat << EOF > tux.json
         {
