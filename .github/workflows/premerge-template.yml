@@ -10,6 +10,9 @@ on:
       distro:
         required: true
         type: string
+      machines:
+        required: true
+        type: string
     secrets:
       TUXSUITE_TOKEN:
         required: true
@@ -24,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: [dragonboard-410c, dragonboard-845c, qrb5165-rb5, qcom-armv8a, sdx55-mtp, sa8155p-adp, qcom-armv7a]
+        machine: ${{inputs.machines}}
         tclibc: [glibc, musl]
     steps:
     - name: Set up Python

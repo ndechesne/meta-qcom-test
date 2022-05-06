@@ -10,4 +10,5 @@ jobs:
       distro: poky
       host: ubuntu-20.04
       images: core-image-base core-image-weston core-image-x11 initramfs-test-image initramfs-test-full-image cryptodev-module
+      machines: [dragonboard-410c, dragonboard-845c, qrb5165-rb5, qcom-armv8a, sdx55-mtp, sa8155p-adp, qcom-armv7a]
     secrets: inherit
