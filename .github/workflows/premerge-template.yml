@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: ${{inputs.machines}}
+        machine: ${{fromJson(inputs.machines)}}
         tclibc: [glibc, musl]
     steps:
     - name: Set up Python
