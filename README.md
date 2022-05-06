@@ -1,5 +1,7 @@
 # meta-qcom
 
+
+
 ## Introduction
 
 OpenEmbedded/Yocto Project layer for Qualcomm based platforms.
