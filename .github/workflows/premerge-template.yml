@@ -41,7 +41,7 @@ jobs:
         PR: ${{ github.event.pull_request.number }}
         IMAGES: ${{inputs.images}}
         DISTRO: ${{inputs.distro}}
-        HOST: {{inputs.host}}
+        HOST: ${{inputs.host}}
       run: |
         cat << EOF > tux.json
         {
