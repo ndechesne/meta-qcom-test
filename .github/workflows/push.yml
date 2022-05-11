@@ -2,6 +2,10 @@ name: Push build test
 
 on:
   push:
+    branches:
+      - master
+      - honister
+      - dunfell
 
 jobs:
   build:
