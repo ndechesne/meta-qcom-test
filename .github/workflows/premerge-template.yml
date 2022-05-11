@@ -63,7 +63,7 @@ jobs:
                 "branch": "$BRANCH"
               },
               {
-                "url": "$URL,
+                "url": "$URL",
                 "ref": "$REF"
               }
             ]
