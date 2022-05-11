@@ -51,8 +51,8 @@ jobs:
         REF: ${{ inputs.ref }}
         IMAGES: ${{ inputs.images }}
         HOST: ${{ inputs.host }}
-        BRANCH: $${{ inputs.branch }}
-        URL: $${{ inputs.url }}
+        BRANCH: ${{ inputs.branch }}
+        URL: ${{ inputs.url }}
       run: |
         cat << EOF > tux.json
         {
