@@ -2,6 +2,8 @@
 
 ## Introduction
 
+
+
 OpenEmbedded/Yocto Project layer for Qualcomm based platforms.
 
 This layer depends on:
