@@ -30,7 +30,7 @@ env:
 
 jobs:
   build:
-    name: Build test for ${{github.event_name}}
+    name: ${{github.event_name}} - ${{github.ref}}
     runs-on: ubuntu-latest
     steps:
     - name: Set up Python
